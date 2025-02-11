@@ -1,13 +1,29 @@
 # How to install TMC-IDE
 
-This installation guide is tested on `linux 6.12 lts`.
+This installation guide is tested on `Arch, Linux 6.12 lts`.
+
+You might need to install a driver to use *USB-2-RTMI*, go watch the links.
+
+## First version - Common Way
+
+``` shell
+chmod +x tmcl-ide-linux-x64-4.6.0.bin
+./tmcl-ide-linux-x64-4.6.0.bin
+./ADI-Trinamic-Tools/TMCL-IDE/V4.6.0/TMCL-IDE.sh
+```
+
+If the *USB* device is not recognized, you might need to install the driver.
+Go watch the links.
+
+&#x2705; Easy.
+&#x274C; Install weird things on your computer.
+
+## Second version - Cool Way
 
 
-
-
-
-
-
+&#x2705; Does not depend on the distro.
+&#x274C; Hard.
+&#x274C; If it is not working, just don't try to understand why.
 
 ### How to install xhost
 
