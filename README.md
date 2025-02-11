@@ -1,1 +1,49 @@
-# PFA-TMC-IDE
+# How to install TMC-IDE
+
+This installation guide is tested on `linux 6.12 lts`.
+
+
+
+
+
+
+
+
+
+
+### How to install Docker
+
+- **Ubuntu** and **Debian**
+`curl -fsSL https://get.docker.com | sh`
+
+- **Arch Linux** and **Manjaro**
+`sudo pacman -Sy --noconfirm docker && sudo systemctl enable --now docker`
+
+- **Fedora**
+`sudo dnf install -y docker docker-compose && sudo systemctl enable --now docker`
+
+- **CentOS** and **RHEL**
+`sudo yum install -y docker && sudo systemctl enable --now docker`
+
+-  **OpenSUSE**
+`sudo zypper install -y docker && sudo systemctl enable --now docker`
+
+- **WSL2** on **Windows**
+Use *Docker Desktop* with [this link](https://www.docker.com/products/docker-desktop/)
+Then use
+`sudo service docker start`
+
+### Useful links
+
+- [TMC4671 Official Page](https://www.analog.com/en/products/tmc4671.html)
+
+- [TMC4671 PI Tuning](https://tmc-item.chiplinkstech.com/AN053_TMC4671-PI_Tuning.pdf)
+
+- [TMC4671 and TMC6100 BOB](https://www.analog.com/en/resources/evaluation-hardware-and-software/evaluation-boards-kits/tmc4671-tmc6100-bob.html#eb-overview)
+
+- [TMC6100 BOB](https://www.analog.com/media/en/technical-documentation/data-sheets/TMC6100_datasheet_rev1.03.pdf)
+
+- [USB-2-RTMI Driver Installation](https://www.analog.com/media/en/technical-documentation/user-guides/USB-2-RTMI_hardware_manual_hw2.0_rev2.01.pdf)
+
+### EOF
+
