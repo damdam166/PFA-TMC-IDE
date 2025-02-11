@@ -20,6 +20,20 @@ Go watch the links.
 
 ## Second version - Cool Way
 
+``` Shell
+docker build -t tmc-ide .
+
+% Common way :
+xhost +local:
+% For last last last Ubuntu version :
+xhost +SI:localuser:root
+
+% `--device=/dev/bus/usb:/dev/bus/usb` mounts all USB ports.
+% Is it better to use `--privileged` here ? idk
+docker run -dit --name ide -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/bus/usb:/dev/bus/usb tmc-ide
+docker exec -it ide setup
+docker exec -it ide ide
+```
 
 &#x2705; Does not depend on the distro.
 &#x274C; Hard.
