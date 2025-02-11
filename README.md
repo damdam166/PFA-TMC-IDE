@@ -20,6 +20,8 @@ Go watch the links.
 
 &#x274C; Install weird things on your computer.
 
+&#x274C; Only working on Linux distro.
+
 ## Second version - Cool Way
 
 ``` shell
