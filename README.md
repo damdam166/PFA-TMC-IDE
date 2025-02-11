@@ -9,7 +9,31 @@ This installation guide is tested on `linux 6.12 lts`.
 
 
 
+### How to install xhost
 
+- **Debian**
+`apt-get install x11-xserver-utils`
+
+- **Ubuntu**
+`apt-get install x11-xserver-utils`
+
+- **Arch Linux**
+`pacman -S xorg-xhost`
+
+- **Kali Linux**
+`apt-get install x11-xserver-utils`
+
+- **CentOS**
+`yum install xorg-x11-server-utils`
+
+- **Fedora**
+`dnf install xorg-x11-server-utils`
+
+- **Windows (WSL2)**
+`sudo apt-get update sudo apt-get install x11-xserver-utils`
+
+- **Raspbian**
+`apt-get install x11-xserver-utils`
 
 ### How to install Docker
 
