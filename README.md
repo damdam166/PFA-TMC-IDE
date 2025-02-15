@@ -5,8 +5,8 @@ This installation guide is tested on `Arch, Linux 6.12 lts`.
 This installation guide works only on :
 
 - Windows 10 and more.
-- Linux using **x86_64** cpu.
-- Linux using **ARM** cpu.
+- Linux using **x86_64** and **x86_32** cpu.
+- Linux using **ARM** cpu, except *soft float*.
 
 ## Windows User
 
