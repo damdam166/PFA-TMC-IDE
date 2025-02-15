@@ -50,6 +50,15 @@ When you want to start the ide, use :
 make
 ```
 
+If you want to edit some variable names :
+
+```
+make clean
+SUDO=" " DOCKER_IMAGE="image_name" CONTAINER_NAME="cont_name" make install
+```
+
+However, you'll have to manually remove container and image.
+
 &#x2705; Does not depend on the distro.
 
 &#x274C; Hard.

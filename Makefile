@@ -1,9 +1,9 @@
-ARCH=${shell uname -m}
-FTD2XX_DIR=libftd2xx
-FTD2XX_FILE=libftd2xx.tgz
-SUDO=sudo
-DOCKER_IMAGE=tmc-ide
-CONTAINER_NAME=ide
+ARCH 	   		?= ${shell uname -m}
+FTD2XX_DIR 		?= libftd2xx
+FTD2XX_FILE		 = libftd2xx.tgz
+SUDO 	   		?= sudo
+DOCKER_IMAGE	?= tmc-ide
+CONTAINER_NAME	?= ide
 
 # Detect the driver file to use
 ifeq (${ARCH}, x86_64)
@@ -36,13 +36,14 @@ info:
 
 find_arch:
 	@make info
-	@if [ "${FTD2XX_LIB}" -eq "no" ]; then \
+	@if [ "${FTD2XX_LIB}" = "no" ]; then \
 		echo -e "This Makefile will not work on your architecture !"; \
 		exit 1; \
-	fi \
-	@cp -f ${FTD2XX_LIB} ${FTD2XX_FILE}
+	fi; \
+	cp -f ${FTD2XX_LIB} ${FTD2XX_FILE} 2>/dev/null || true
 
 setup:
+	@make find_arch
 	@${SUDO} docker build -t ${DOCKER_IMAGE} .
 	@${SUDO} docker run -dit --name ${CONTAINER_NAME} \
 		-e DISPLAY=${DISPLAY} \
