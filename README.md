@@ -2,42 +2,44 @@
 
 This installation guide is tested on `Arch, Linux 6.12 lts`.
 
-You might need to install a driver to use *USB-2-RTMI*, go watch the links.
+This installation guide works only on :
 
-## First version - Common Way
+- Windows 10 and more.
+- Linux using **x86_64** cpu.
+- Linux using **ARM** cpu.
 
-``` shell
-unzip tmcl-ide-linux-x64-4.6.0.zip
-chmod +x tmcl-ide-linux-x64-4.6.0.bin
-./tmcl-ide-linux-x64-4.6.0.bin
-./ADI-Trinamic-Tools/TMCL-IDE/V4.6.0/TMCL-IDE.sh
-```
+## Windows User
 
-If the *USB* device is not recognized, you might need to install the driver.
-Go watch the links.
+Follow these steps :
+
+1) Install *TMCL IDE* using [this link](https://www.analog.com/en/resources/evaluation-hardware-and-software/motor-motion-control-software/tmcl-ide.html#latest).
+
+2) Install the driver using [this link](https://www.analog.com/media/en/technical-documentation/user-guides/USB-2-RTMI_hardware_manual_hw2.0_rev2.01.pdf).
 
 &#x2705; Easy.
 
-&#x274C; Install weird things on your computer.
+&#x274C; Only working on Windows.
 
-&#x274C; Only working on Linux distro.
+## Linux User
 
-## Second version - Cool Way
+To install the ide and the driver :
 
-``` shell
+```
+cd PFA-TMC-IDE
+
 unzip tmcl-ide-linux-x64-4.6.0.zip
-docker build -t tmc-ide .
 
-% Common way :
+% Install xhost if you doesn't have it, see explanation below.
 xhost +local:
-% For last last last Ubuntu version :
-xhost +SI:localuser:root
 
-% `--device=/dev/bus/usb:/dev/bus/usb` mounts all USB ports.
-% Is it better to use `--privileged` here ? idk
-docker run -dit --name ide -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/bus/usb:/dev/bus/usb tmc-ide
-docker exec -it ide setup
-docker exec -it ide ide
+make install
+```
+
+When deconnecting the **USB-2-RTMI**, you should restart the ide by using :
+
+```
+CTRL-C
+make
 ```
 
 &#x2705; Does not depend on the distro.

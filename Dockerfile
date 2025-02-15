@@ -76,6 +76,22 @@ RUN echo '#!/bin/bash\nexec /root/ADI-Trinamic-Tools/TMCL-IDE/V4.6.0/TMCL-IDE.sh
 # Add USB access
 RUN usermod -aG dialout root
 
+# USB driver D2XX
+RUN apt-get update && apt-get install -y \
+    kmod \
+    usbutils \
+    && rm -rf /var/lib/apt/lists/*
+
+# Driver for x86_64
+COPY ./libftd2xx-x86_64-1.4.27.tgz /root/libftd2xx-x86_64-1.4.27.tgz
+RUN tar -C /root/ -xvzf /root/libftd2xx-x86_64-1.4.27.tgz
+RUN rmmod ftdi_sio || true && rmmod usbserial || true && modprobe -r ftdi_sio || true
+RUN cd /root/release/build && cp libftd2xx.* /usr/local/lib
+RUN chmod 0755 /usr/local/lib/libftd2xx.so.1.4.27
+RUN ln -sf /usr/local/lib/libftd2xx.so.1.4.27 /usr/local/lib/libftd2xx.so
+RUN cd /root/release && cp ftd2xx.h  /usr/local/include && cp WinTypes.h  /usr/local/include
+RUN ldconfig -v
+
 WORKDIR /root
 CMD ["/bin/bash"]
 
