@@ -42,6 +42,12 @@ CTRL-C
 make
 ```
 
+When you want to start the ide, use :
+
+```
+make
+```
+
 &#x2705; Does not depend on the distro.
 
 &#x274C; Hard.
