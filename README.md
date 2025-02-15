@@ -22,6 +22,8 @@ Follow these steps :
 
 ## Linux User
 
+You will need `docker`, see explanation below.
+
 To install the ide and the driver :
 
 ```
