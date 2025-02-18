@@ -1,4 +1,4 @@
-# How to install TMC-IDE
+# How to install TMCL-IDE
 
 This installation guide is tested on `Arch, Linux 6.12 lts`.
 
@@ -37,7 +37,7 @@ xhost +local:
 make install
 ```
 
-When deconnecting the **USB-2-RTMI**, you should restart the ide by using :
+You should connect first the **USB-2-RTMI**, then restart the ide by using :
 
 ```
 CTRL-C
@@ -64,6 +64,13 @@ However, you'll have to manually remove container and image.
 &#x274C; Hard.
 
 &#x274C; If it is not working, just don't try to understand why.
+
+### A manual Installation on Linux
+
+The file `tmcl-ide-linux-x64-4.6.0.zip` contains the setup executable.
+
+Moreover, you will need to install the driver manually 
+by reading the doc in the `libftd2xx/*.tgz`.
 
 ### How to install xhost
 
