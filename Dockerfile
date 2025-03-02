@@ -1,7 +1,20 @@
-FROM ubuntu:22.04
+FROM ubuntu:20.04
 
 COPY ./tmcl-ide-linux-x64-4.6.0.bin /root/tmcl-ide-linux-x64-4.6.0.bin
 RUN chmod +x /root/tmcl-ide-linux-x64-4.6.0.bin
+
+# Geographical area
+RUN apt-get update && apt-get install -y \
+    locales \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN locale-gen en_US.UTF-8 && \
+    update-locale LANG=en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+
+# It stucks the downloading
+ARG DEBIAN_FRONTEND=noninteractive
 
 # Setup executable
 RUN apt-get update && apt-get install -y \
@@ -39,14 +52,6 @@ RUN apt-get update && apt-get install -y \
     locales \
     && rm -rf /var/lib/apt/lists/*
 
-RUN locale-gen en_US.UTF-8 && \
-    update-locale LANG=en_US.UTF-8
-ENV LANG=en_US.UTF-8
-ENV LC_ALL=en_US.UTF-8
-
-# Geographical area
-ARG DEBIAN_FRONTEND=noninteractive
-
 # Qt and OpenGL
 RUN apt-get update && apt-get install -y \
     qtbase5-dev \
@@ -66,6 +71,22 @@ RUN apt-get update && apt-get install -y \
 # Qt using X11
 ENV QT_QPA_PLATFORM=xcb
 
+# Add USB access
+RUN usermod -aG dialout root
+
+# Tools to debug USB driver D2XX
+RUN apt-get update && apt-get install -y \
+    kmod \
+    usbutils \
+    && rm -rf /var/lib/apt/lists/*
+
+# The USB Driver Setup (D2XX)
+RUN mkdir -p /root/libftd2xx
+COPY ./libftd2xx/libft4222-linux-1.4.4.221.tgz /root/libftd2xx/libftd2xx.tgz
+RUN cd /root/libftd2xx && \
+    tar -xvzf libftd2xx.tgz && \
+    /root/libftd2xx/install4222.sh
+
 # Bash scripts for newbies
 RUN echo '#!/bin/bash\nexec /root/tmcl-ide-linux-x64-4.6.0.bin "$@"' > /usr/local/bin/setup && \
     chmod +x /usr/local/bin/setup
@@ -73,25 +94,7 @@ RUN echo '#!/bin/bash\nexec /root/tmcl-ide-linux-x64-4.6.0.bin "$@"' > /usr/loca
 RUN echo '#!/bin/bash\nexec /root/ADI-Trinamic-Tools/TMCL-IDE/V4.6.0/TMCL-IDE.sh "$@"' > /usr/local/bin/ide && \
     chmod +x /usr/local/bin/ide
 
-# Add USB access
-RUN usermod -aG dialout root
-
-# USB driver D2XX
-RUN apt-get update && apt-get install -y \
-    kmod \
-    usbutils \
-    && rm -rf /var/lib/apt/lists/*
-
-# Driver
-COPY ./libftd2xx.tgz /root/libftd2xx.tgz
-RUN tar -C /root/ -xvzf /root/libftd2xx.tgz
-RUN rmmod ftdi_sio || true && rmmod usbserial || true && modprobe -r ftdi_sio || true
-RUN cd /root/release/build && cp libftd2xx.* /usr/local/lib
-RUN chmod 0755 /usr/local/lib/libftd2xx.so.1.4.27
-RUN ln -sf /usr/local/lib/libftd2xx.so.1.4.27 /usr/local/lib/libftd2xx.so
-RUN cd /root/release && cp ftd2xx.h  /usr/local/include && cp WinTypes.h  /usr/local/include
-RUN ldconfig -v
-
+# Some commands to simplify debug
 WORKDIR /root
 CMD ["/bin/bash"]
 

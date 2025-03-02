@@ -1,24 +1,8 @@
-ARCH 	   		?= ${shell uname -m}
-FTD2XX_DIR 		?= libftd2xx
-FTD2XX_FILE		 = libftd2xx.tgz
+FTD2XX_DIR 		 = libftd2xx
+FTD2XX_LIB 		 = ${FTD2XX_DIR}/libft4222-linux-1.4.4.221.tgz
 SUDO 	   		?= sudo
 DOCKER_IMAGE	?= tmc-ide
 CONTAINER_NAME	?= ide
-
-# Detect the driver file to use
-ifeq (${ARCH}, x86_64)
-	FTD2XX_LIB=${FTD2XX_DIR}/libftd2xx-x86_64-1.4.27.tgz
-else ifeq (${ARCH}, x86_32)
-	FTD2XX_LIB=${FTD2XX_DIR}/libftd2xx-x86_32-1.4.27.tgz
-else ifeq (${ARCH}, armv6l)
-	FTD2XX_LIB=${FTD2XX_DIR}/libftd2xx-arm-v6-hf-1.4.27.tgz
-else ifeq (${ARCH}, armv7l)
-	FTD2XX_LIB=${FTD2XX_DIR}/libftd2xx-arm-v7-hf-1.4.27.tgz
-else ifeq (${ARCH}, aarch64)
-	FTD2XX_LIB=libftd2xx-arm-v8-1.4.27.tgz
-else
-	FTD2XX_LIB=no
-endif
 
 all: restart ide
 
@@ -36,11 +20,6 @@ info:
 
 find_arch:
 	@make info
-	@if [ "${FTD2XX_LIB}" = "no" ]; then \
-		echo -e "This Makefile will not work on your architecture !"; \
-		exit 1; \
-	fi; \
-	cp -f ${FTD2XX_LIB} ${FTD2XX_FILE} 2>/dev/null || true
 
 setup:
 	@make find_arch
