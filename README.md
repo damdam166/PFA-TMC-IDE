@@ -14,7 +14,13 @@ Follow these steps :
 
 1) Install *TMCL IDE* using [this link](https://www.analog.com/en/resources/evaluation-hardware-and-software/motor-motion-control-software/tmcl-ide.html#latest).
 
+Or you can juste use the binary in the folder `windows_setup/` of this repository.
+
 2) Install the driver using [this link](https://www.analog.com/media/en/technical-documentation/user-guides/USB-2-RTMI_hardware_manual_hw2.0_rev2.01.pdf).
+
+Or you can juste use the binary in the folder `windows_setup/` of this repository.
+
+3) Follow the steps of [this link](https://www.analog.com/media/en/technical-documentation/user-guides/USB-2-RTMI_hardware_manual_hw2.0_rev2.01.pdf).
 
 &#x2705; Easy.
 
