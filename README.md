@@ -10,6 +10,8 @@ This installation guide works only on :
 
 ## Windows User
 
+I recommend you to make a *Windows VM*, and share the *usb ports* to the *VM*.
+
 Follow these steps :
 
 1) Install *TMCL IDE* using [this link](https://www.analog.com/en/resources/evaluation-hardware-and-software/motor-motion-control-software/tmcl-ide.html#latest).
